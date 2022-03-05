@@ -1,0 +1,39 @@
+{
+  "name": "siworks/trivea-client",
+  "type": "library",
+  "description": "A TRIVEA client for PHP",
+  "keywords": [
+    "trivea",
+    "client"
+  ],
+  "license": "MIT",
+  "authors": [
+    {
+      "name": "Rafael N. Garbinatto",
+      "email": "rafael@trivea.com.br"
+    }
+  ],
+  "require": {
+    "php": ">=7.4",
+    "ext-json": "*",
+    "guzzlehttp/guzzle": ">=6.0",
+    "logicpanel/keycloak-php-sdk": "0.0.1"
+  },
+  "require-dev": {
+    "friendsofphp/php-cs-fixer": "^3.4",
+    "phpunit/phpunit": "^9.5",
+    "phpspec/phpspec": "^7.1"
+  },
+  "autoload": {
+    "psr-4": {
+      "Siworks\\Trivea\\": "src/"
+    },
+    "files": [ "src/helpers.php" ]
+  },
+  "autoload-dev": {
+    "psr-4": {
+      "Siworks\\Trivea\\Tests\\": "tests/"
+    }
+  },
+  "minimum-stability": "stable"
+}
