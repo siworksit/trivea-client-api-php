@@ -1,0 +1,7 @@
+/vendor/
+/.idea/php.xml
+/.idea/modules.xml
+/.idea/php-test-framework.xml
+/.idea/vcs.xml
+/.idea/trivea-client-api-php.iml
+/.idea/git_toolbox_prj.xml
