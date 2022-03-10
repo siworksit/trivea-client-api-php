@@ -112,6 +112,7 @@ class Client
      */
     public function request(string $method, string $endpoint, array $options = [], $query_string = null, bool $requires_auth = true)
     {
+
         if ($requires_auth && empty($this->key)) {
             throw new InvalidArgument('You must provide a Hubspot api key or token.');
         }

@@ -42,4 +42,14 @@ abstract class Resource
     {
         return ms_timestamp($time);
     }
+
+    /**
+     * @return \Siworks\Trivea\Http\Client
+     */
+    public function getClient()
+    {
+        return $this->client;
+    }
+
+
 }

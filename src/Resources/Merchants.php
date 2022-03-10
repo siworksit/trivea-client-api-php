@@ -5,7 +5,7 @@ namespace Siworks\Trivea\Resources;
 /**
  * @see https://developers.trivea.com/docs/methods/checkout
  */
-class Checkouts extends Resource
+class Merchants extends Resource
 {
 
     /**
@@ -15,9 +15,9 @@ class Checkouts extends Resource
      *
      * @return \Siworks\Trivea\Http\Response
      */
-    public function createCheckout(array $properties)
+    public function create(array $properties)
     {
-        $uri = '/page/checkouts';
+        $uri = '/user/checkouts';
 
         return $this->client->request(
             'post',
@@ -25,9 +25,6 @@ class Checkouts extends Resource
             $properties
         );
     }
-
-
-
 
     /**
      * Create a open checkout transaction.
@@ -42,7 +39,7 @@ class Checkouts extends Resource
 
         return $this->client->request(
             'post',
-            $this->apiUrl .$uri,
+            $this->apiUrl .uri,
             $properties
         );
     }
