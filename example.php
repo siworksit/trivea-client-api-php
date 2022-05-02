@@ -5,6 +5,12 @@ require 'vendor/autoload.php';
 use Siworks\Trivea\Provider\Keycloak;
 use Siworks\Trivea\Resources\Checkouts;
 
+
+/**
+ * INICIO - API TRIVEA
+ * EXEMPLO DE CRIACAO DE CHECKOUT
+ *
+ */
 $provider = new Keycloak(
     "frontend-service",
     "siworks",
