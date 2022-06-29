@@ -22,7 +22,7 @@ class Keycloak extends Resource
 
         return $this->client->request(
             'POST',
-            $this->apiUrl .uri,
+            $this->apiUrl . $uri,
             $properties
         );
     }
@@ -41,6 +41,17 @@ class Keycloak extends Resource
 
         return $this->client->request(
             'PUT',
+            $this->apiUrl . $uri,
+            $properties
+        );
+    }
+
+    public function setRoleToUser(string $userId, array $properties){
+
+        $uri = "/admin/realms/siworks/users/{$userId}/role-mappings/realm";
+
+        return $this->client->request(
+            'POST',
             $this->apiUrl . $uri,
             $properties
         );
