@@ -26,9 +26,6 @@ class Checkouts extends Resource
         );
     }
 
-
-
-
     /**
      * Create a open checkout transaction.
      *
@@ -36,7 +33,7 @@ class Checkouts extends Resource
      *
      * @return \Siworks\Trivea\Http\Response
      */
-    public function CreateMerchantTransaction(array $properties)
+    public function createTransaction(array $properties)
     {
         $uri = '/user/checkouts';
 
