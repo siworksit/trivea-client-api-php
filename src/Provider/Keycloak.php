@@ -15,13 +15,10 @@ class Keycloak extends KeycloakClient
     /**
      * @var string
      */
-    private $clientId;
+    private string $clientId;
+    private string $grantType;
 
-    /**
-     * @var string
-     */
     private $accessToken;
-
 
     /**
      * KeycloakClient constructor.
@@ -31,18 +28,17 @@ class Keycloak extends KeycloakClient
      * @param string $url
      */
     public function __construct(
-        string $clientId,
-        string $realm,
-        string $url,
-        string $username,
-        string $password
+        array $properties
+
     ) {
-        $this->guzzleClient = new GuzzleClient(['base_uri' => "$url/auth/admin/realms/$realm/"]);
-        $this->clientId = $clientId;
-        $this->url = $url;
-        $this->realm = $realm;
-        $this->username = $username;
-        $this->password = $password;
+        $this->guzzleClient = new GuzzleClient(['base_uri' => "{$properties['url']}/auth/admin/realms/{$properties['realm']}/"]);
+        $this->clientId = ( is_null($properties['clientId']) || empty($properties['clientId']) )? null : $properties['clientId'];
+        $this->clientSecret = ( is_null($properties['secret']) || empty($properties['secret']) )? null : $properties['secret'];
+        $this->grantType = ( is_null($properties['grant_type']) || empty($properties['grant_type']) )? "password" : $properties['grant_type'];
+        $this->url = ( is_null($properties['url']) || empty($properties['url']) )? null : $properties['url'];
+        $this->realm = ( is_null($properties['realm']) || empty($properties['realm']) )? null : $properties['realm'];
+        $this->username = ( is_null($properties['username']) || empty($properties['username']) )? null : $properties['username'];
+        $this->password = ( is_null($properties['password']) || empty($properties['password']) )? null : $properties['password'];;
     }
 
     /**
@@ -64,13 +60,6 @@ class Keycloak extends KeycloakClient
         if ($body !== null) {
             $headers['Content-Type'] = 'application/json';
         }
-
-        /* $request = $this->authenticatedRequest(
-            $method,
-            $uri,
-            $accessToken,
-            ['headers' => $headers, 'body' => json_encode($body)]
-        ); */
 
         try {
             return $this->authenticatedRequest(
@@ -105,14 +94,20 @@ class Keycloak extends KeycloakClient
         }else{
 
             $guzzleClient = new GuzzleClient(['base_uri' => "{$this->url}"]);
-            $headers = []; // 'Content-Type' => 'application/json'
+            $headers = [
+                "Content-Type" => "application/x-www-form-urlencoded"
+            ]; // 'Content-Type' => 'application/json'
+
             $form_params = [
                 'client_id' => $this->clientId,
+                'client_secret' => $this->clientSecret,
                 'username' => $this->username,
                 'password' => $this->password,
-                'grant_type' => 'password'
+                'grant_type' => $this->grantType,
+                'scope'=> ($this->grantType != $this->password) ? null : 'openid'
             ];
-            $response = $guzzleClient->request("POST", "/auth/realms/{$this->realm}/protocol/openid-connect/token", compact("headers", "form_params"));
+
+            $response = $guzzleClient->request("POST", "/realms/{$this->realm}/protocol/openid-connect/token", compact("headers", "form_params"));
 
             $object = json_decode((string) $response->getBody());
             $this->accessToken = $object->access_token;
