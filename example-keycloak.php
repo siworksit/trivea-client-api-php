@@ -3,7 +3,7 @@
 require 'vendor/autoload.php';
 
 use Siworks\Trivea\Provider\Keycloak;
-use Siworks\Trivea\Resources\Checkouts;
+use Siworks\Trivea\Resources\Keycloak as keycloakResource;
 
 
 /**
@@ -12,14 +12,18 @@ use Siworks\Trivea\Resources\Checkouts;
  *
  */
 $provider = new Keycloak(
-    "frontend-service",
-    "siworks",
-    "http://kc.trivea.com.br:8180/",
-    "admin",
-    "admin"
+        [
+            "clientId" => "admin-cli",
+            "secret" => 'secret',
+            "url" => "http://kc.trivea.com.br:8180/",
+            "realm" => "dev-trivea",
+            "grant_type" => "client_credentials",
+            "username" => "admin",
+            "password" => "admin"
+        ]
 );
 
-$clientKeycloak = new Keycloak($provider, ['apiUrl' => 'http://kc.trivea.com.br:8180']);
+$clientKeycloak = new keycloakResource($provider, ['apiUrl' => 'http://kc.trivea.com.br:8180']);
 /*
     {
         "firstName":"teste do ng",
@@ -58,11 +62,19 @@ $result = $clientKeycloak->createUser(
                     "temporary"=> false
                 ],
         ],
-        "realmRoles" => [	"mb-user" ]
+        "realmRoles" => ["free"]
     ]
 );
+
+/**
+ * Set ROLE to USER
+ * */
+//$clientKeycloak->setRoleToUser(, prope)
 
 $res = $result->getBody()->getContents();
 $res = json_decode($res);
 
-var_dump($res);
+echo "http status=";
+print_r($result->getStatusCode());
+echo "\n";
+print_r($result->getHeaderLine("Location"));
