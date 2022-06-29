@@ -12,11 +12,15 @@ use Siworks\Trivea\Resources\Checkouts;
  *
  */
 $provider = new Keycloak(
-    "frontend-service",
-    "siworks",
-    "http://kc.trivea.com.br:8180/",
-    "admin",
-    "admin"
+    [
+        "clientId" => "backend-service",
+        "secret" => null,
+        "url" => "http://kc.trivea.com.br:8180/",
+        "realm" => "siworks",
+        "grant_type" => "password",
+        "username" => "admin",
+        "password" => "admin"
+    ]
 );
 
 $checkouts = new Checkouts($provider, ['apiUrl' => 'http://localhost:8080']);
@@ -27,8 +31,8 @@ $checkouts = new Checkouts($provider, ['apiUrl' => 'http://localhost:8080']);
         "merchant":"0f800a43-d4e5-43c1-8d84-71b7fec8c32c",
         "subTotal":10.00
     }
- */
-$result = $checkouts->CreateMerchantTransaction([
+*/
+$result = $checkouts->createTransaction([
    'amount' => 10.00,
    'type' => 'TRANSACTION',
    "merchant"=> "0f800a43-d4e5-43c1-8d84-71b7fec8c32c",
