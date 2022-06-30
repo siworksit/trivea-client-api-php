@@ -107,9 +107,14 @@ class Keycloak extends KeycloakClient
                 'scope'=> ($this->grantType != $this->password) ? null : 'openid'
             ];
 
-            $response = $guzzleClient->request("POST", "/realms/{$this->realm}/protocol/openid-connect/token", compact("headers", "form_params"));
+            try {
+                $response = $guzzleClient->request("POST", "/realms/{$this->realm}/protocol/openid-connect/token", compact("headers", "form_params"));
+                $object = json_decode((string) $response->getBody());
+            }catch (KeycloakException $e){
+                throw $e;
+            }
 
-            $object = json_decode((string) $response->getBody());
+
             $this->accessToken = $object->access_token;
             return $this->accessToken;
         }
