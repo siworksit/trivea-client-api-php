@@ -31,7 +31,7 @@ class Keycloak extends KeycloakClient
         array $properties
 
     ) {
-        $this->guzzleClient = new GuzzleClient(['base_uri' => "{$properties['url']}/auth/admin/realms/{$properties['realm']}/"]);
+        $this->guzzleClient = new GuzzleClient(['base_uri' => "{$properties['url']}/admin/realms/{$properties['realm']}/"]);
         $this->clientId = ( is_null($properties['clientId']) || empty($properties['clientId']) )? null : $properties['clientId'];
         $this->clientSecret = ( is_null($properties['secret']) || empty($properties['secret']) )? null : $properties['secret'];
         $this->grantType = ( is_null($properties['grant_type']) || empty($properties['grant_type']) )? "password" : $properties['grant_type'];
