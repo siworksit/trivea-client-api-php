@@ -21,7 +21,7 @@ class Checkouts extends Resource
 
         return $this->client->request(
             'post',
-            $this->apiUrl .uri,
+            $this->apiUrl . $uri,
             $properties
         );
     }
