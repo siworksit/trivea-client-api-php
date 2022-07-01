@@ -13,8 +13,8 @@ use Siworks\Trivea\Resources\Keycloak as keycloakResource;
  */
 $provider = new Keycloak(
         [
-            "clientId" => "frontend-service",
-            "secret" => 'secret',
+            "client_id" => "frontend-service",
+            "client_secret" => 'secret',
             "url" => "http://kc.trivea.com.br:8180/",
             "realm" => "dev-trivea",
             "grant_type" => "password",

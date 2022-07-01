@@ -13,8 +13,8 @@ use Siworks\Trivea\Resources\Checkouts;
  */
 $provider = new Keycloak(
     [
-        "clientId" => "backend-service",
-        "secret" => "IRJYL6omabHxxQrmcKmAWAPezKm5c2ch",
+        "client_id" => "backend-service",
+        "client_secret" => "IRJYL6omabHxxQrmcKmAWAPezKm5c2ch",
         "url" => "http://kc.trivea.com.br:8180/",
         "realm" => "dev-trivea",
         "grant_type" => "password",
