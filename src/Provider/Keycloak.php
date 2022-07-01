@@ -1,12 +1,11 @@
 <?php
-
 namespace Siworks\Trivea\Provider;
 
 use GuzzleHttp\Client as GuzzleClient;
 use Siworks\Trivea\Exception\KeycloakCredentialsException;
 use Siworks\Trivea\Exception\KeycloakException;
 
-use Siworks\Trivea\KeycloakClient;
+use Siworks\Trivea\Client\KeycloakClient;
 use Psr\Http\Message\ResponseInterface;
 
 class Keycloak extends KeycloakClient
