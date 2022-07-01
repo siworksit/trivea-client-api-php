@@ -18,7 +18,7 @@ class Keycloak extends Resource
      */
     public function createUser(array $properties)
     {
-        $uri = '/auth/admin/realms/siworks/users';
+        $uri = "/admin/realms/{$properties['realm']}/users";
 
         return $this->client->request(
             'POST',
@@ -37,7 +37,7 @@ class Keycloak extends Resource
      */
     public function updateUser(string $userId, array $properties)
     {
-        $uri = "/auth/admin/realms/siworks/users/{$userId}";
+        $uri = "/admin/realms/{$properties['realms']}/users/{$userId}";
 
         return $this->client->request(
             'PUT',
@@ -48,7 +48,7 @@ class Keycloak extends Resource
 
     public function setRoleToUser(string $userId, array $properties){
 
-        $uri = "/admin/realms/siworks/users/{$userId}/role-mappings/realm";
+        $uri = "/admin/realms/{$properties['realm']}/users/{$userId}/role-mappings/realm";
 
         return $this->client->request(
             'POST',
@@ -67,7 +67,7 @@ class Keycloak extends Resource
      */
     public function resetPassword(string $userId, array $properties)
     {
-        $uri = "/auth/admin/realms/siworks/users/{$userId}";
+        $uri = "/admin/realms/{$properties['realm']}/users/{$userId}";
 
         return $this->client->request(
             'PUT',
@@ -86,7 +86,7 @@ class Keycloak extends Resource
      */
     public function deleteUser(string $userId, array $properties)
     {
-        $uri = "/auth/admin/realms/siworks/users/{$userId}";
+        $uri = "/admin/realms/{$properties['realm']}/users/{$userId}";
 
         return $this->client->request(
             'DELETE',

@@ -114,7 +114,6 @@ class Keycloak extends KeycloakClient
                 throw $e;
             }
 
-
             $this->accessToken = $object->access_token;
             return $this->accessToken;
         }
