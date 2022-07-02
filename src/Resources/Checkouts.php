@@ -17,7 +17,7 @@ class Checkouts extends Resource
      */
     public function createCheckout(array $properties)
     {
-        $uri = '/page/checkouts';
+        $uri = '/page/checkout';
 
         return $this->client->request(
             'post',
