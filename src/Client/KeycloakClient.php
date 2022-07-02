@@ -62,6 +62,7 @@ class KeycloakClient
 
         if ($body !== null) {
             $headers['Content-Type'] = 'application/json';
+            $headers['Accept'] = 'application/json';
         }
 
         $request = $this->oauthProvider->getAuthenticatedRequest(
