@@ -13,17 +13,17 @@ use Siworks\Trivea\Resources\Keycloak as keycloakResource;
  */
 $provider = new Keycloak(
         [
-            "client_id" => "frontend-service",
-            "client_secret" => 'secret',
-            "url" => "http://kc.trivea.com.br:8180/",
+            "client_id" => "admin-api",
+            "client_secret" => 'Lv4NvsvhX6wZkibzDfUzPyXPKT9p9Hpq',
+            "url" => "http://localhost:8180/",
             "realm" => "dev-trivea",
-            "grant_type" => "password",
-            "username" => "admin",
-            "password" => "admin"
+            "grant_type" => "client_credentials",
+            "username" => null,
+            "password" => null
         ]
 );
 
-$clientKeycloak = new keycloakResource($provider, ['apiUrl' => 'http://kc.trivea.com.br:8180']);
+$clientKeycloak = new keycloakResource($provider, ['apiUrl' => 'http://localhost:8180']);
 /*
     {
         "firstName":"teste do ng",
@@ -39,7 +39,7 @@ $clientKeycloak = new keycloakResource($provider, ['apiUrl' => 'http://kc.trivea
             }
         ]
     }
- */
+*/
 $result = $clientKeycloak->createUser(
     [
         "firstName" => "teste do ng",
@@ -62,8 +62,15 @@ $result = $clientKeycloak->createUser(
                     "temporary"=> false
                 ],
         ],
+        "access" => [
+            "manageGroupMembership"=> true,
+            "view"=> true,
+            "mapRoles"=> true,
+            "impersonate"=> true,
+            "manage"=> true
+        ],
         "realmRoles" => ["free"]
-    ]
+    ], "dev-trivea"
 );
 
 /**

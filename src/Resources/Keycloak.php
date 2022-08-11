@@ -16,9 +16,9 @@ class Keycloak extends Resource
      *
      * @return \Siworks\Trivea\Http\Response
      */
-    public function createUser(array $properties)
+    public function createUser(array $properties, $realm)
     {
-        $uri = "/admin/realms/{$properties['realm']}/users";
+        $uri = "/admin/realms/{$realm}/users";
 
         return $this->client->request(
             'POST',
@@ -35,9 +35,9 @@ class Keycloak extends Resource
      *
      * @return \Siworks\Trivea\Http\Response
      */
-    public function updateUser(string $userId, array $properties)
+    public function updateUser(string $userId, array $properties, $realm)
     {
-        $uri = "/admin/realms/{$properties['realms']}/users/{$userId}";
+        $uri = "/admin/realms/{$realm}/users/{$userId}";
 
         return $this->client->request(
             'PUT',
@@ -46,9 +46,9 @@ class Keycloak extends Resource
         );
     }
 
-    public function setRoleToUser(string $userId, array $properties){
+    public function setRoleToUser(string $userId, array $properties, $realm){
 
-        $uri = "/admin/realms/{$properties['realm']}/users/{$userId}/role-mappings/realm";
+        $uri = "/admin/realms/{$realm}/users/{$userId}/role-mappings/realm";
 
         return $this->client->request(
             'POST',
@@ -65,9 +65,9 @@ class Keycloak extends Resource
      *
      * @return \Siworks\Trivea\Http\Response
      */
-    public function resetPassword(string $userId, array $properties)
+    public function resetPassword(string $userId, array $properties, $realm)
     {
-        $uri = "/admin/realms/{$properties['realm']}/users/{$userId}";
+        $uri = "/admin/realms/{$realm}/users/{$userId}";
 
         return $this->client->request(
             'PUT',
@@ -84,9 +84,9 @@ class Keycloak extends Resource
      *
      * @return \Siworks\Trivea\Http\Response
      */
-    public function deleteUser(string $userId, array $properties)
+    public function deleteUser(string $userId, array $properties, $realm)
     {
-        $uri = "/admin/realms/{$properties['realm']}/users/{$userId}";
+        $uri = "/admin/realms/{$realm}/users/{$userId}";
 
         return $this->client->request(
             'DELETE',
